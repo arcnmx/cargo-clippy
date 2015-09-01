@@ -1,10 +1,12 @@
 [package]
 name = "cargo-clippy"
 version = "0.1.0"
-authors = ["Ray Solomon <raybsolomon@gmail.com>"]
+authors = [
+	"Ray Solomon <raybsolomon@gmail.com>",
+	"arcnmx"
+]
 license = "MIT"
 readme = "README.md"
 
-[dependencies]
-clippy = { git = "https://github.com/Manishearth/rust-clippy" }
-glob = "0.2"
+[dependencies.clippy]
+git = "https://github.com/Manishearth/rust-clippy"

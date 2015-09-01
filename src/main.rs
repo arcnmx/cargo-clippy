@@ -1,5 +1,3 @@
-extern crate glob;
-
 use std::path::Path;
 
 #[cfg(not(test))]
@@ -9,8 +7,7 @@ fn main() {
 
     let path = env::current_exe().unwrap();
     let path = path.parent().unwrap();
-    let path = glob::glob(path.join("deps/").to_str().unwrap()).unwrap().next()
-        .expect("libclippy.so not found").unwrap();
+    let path = path.join("deps/");
 
     let args = wrap_args(env::args(), path);
     let mut command = Command::new("cargo");
