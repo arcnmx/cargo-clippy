@@ -1,9 +1,18 @@
+extern crate glob;
+
+use std::path::Path;
+
 #[cfg(not(test))]
 fn main() {
     use std::env;
     use std::process::{self, Command};
 
-    let args = wrap_args(env::args());
+    let path = env::current_exe().unwrap();
+    let path = path.parent().unwrap();
+    let path = glob::glob(path.join("deps/").to_str().unwrap()).unwrap().next()
+        .expect("libclippy.so not found").unwrap();
+
+    let args = wrap_args(env::args(), path);
     let mut command = Command::new("cargo");
     command.args(&args);
     let mut child = command.spawn().unwrap_or_else(|e| panic!("{}", e));
@@ -14,9 +23,10 @@ fn main() {
     }
 }
 
-fn wrap_args<T, I>(it: I) -> Vec<String>
+fn wrap_args<T, I, P>(it: I, clippy_path: P) -> Vec<String>
     where T: AsRef<str>,
-          I: IntoIterator<Item=T> {
+          I: IntoIterator<Item=T>,
+          P: AsRef<Path> {
 
     let it = it.into_iter();
     let mut args = vec!["rustc".to_owned()];
@@ -29,43 +39,12 @@ fn wrap_args<T, I>(it: I) -> Vec<String>
     }
 
     if !has_double_hyphen {
-        args.push("--".to_owned());
+        args.push("--".to_string()); // clippy lint warning!
     }
+    args.push("-L".to_owned());
+    args.push(clippy_path.as_ref().to_string_lossy().into_owned());
+    args.push("-lclippy".to_owned());
+    args.push("-Zextra-plugins=clippy".to_owned());
     args.push("-Zno-trans".to_owned());
     args
-}
-
-#[test]
-fn wrap_args_1() {
-    let args = [
-        "/usr/local/bin/cargo-check",
-        "check",
-        "-h"
-    ];
-    let actual = wrap_args(&args);
-    let expected = [
-        "rustc",
-        "-h",
-        "--",
-        "-Zno-trans"
-    ];
-    assert_eq!(actual, expected);
-}
-
-#[test]
-fn wrap_args_2() {
-    let args = [
-        "/usr/local/bin/cargo-check",
-        "check",
-        "--",
-        "-Zverbose"
-    ];
-    let actual = wrap_args(&args);
-    let expected = [
-        "rustc",
-        "--",
-        "-Zverbose",
-        "-Zno-trans"
-    ];
-    assert_eq!(actual, expected);
 }

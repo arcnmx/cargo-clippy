@@ -1,38 +1,24 @@
-# cargo-check
+# cargo-clippy
 
-[![Build Status](https://travis-ci.org/rsolomo/cargo-check.svg?branch=master)](https://travis-ci.org/rsolomo/cargo-check)
+[![travis-badge][]][travis] [![license-badge][]][license]
 
-This is a wrapper around `cargo rustc -- -Zno-trans`.
-It can be helpful for running a faster compile if you
-only need correctness checks.
+`cargo clippy` runs [clippy] on the current project.
+This is a fork of [cargo-check].
+
+**NOTE:** requires nightly Rust.
 
 ## Installation
 
-- `cargo build --release`
-- add `target/release/cargo-check` into your `$PATH`
+First compile with `cargo build --release`, then add
+`target/release/cargo-clippy` into your `$PATH`.
 
-Note that additonal `cargo rustc` options can still be passed through.
+**WARNING:** simply copying it is not enough; you must
+specifically add the directory to your path, or use
+a symbolic link instead.
 
-In other words, this:
-
-```
-cargo check -v -- -Zprint-link-args
-```
-
-Should do the same thing as this:
-
-```
-cargo rustc -v -- -Zprint-link-args -Zno-trans
-```
-
-And this:
-
-```
-cargo check --lib
-```
-
-Will do the same thing as this:
-
-```
-cargo rustc --lib -- -Zno-trans
-```
+[travis-badge]: https://img.shields.io/travis/arcnmx/cargo-clippy/master.svg?style=flat-square
+[travis]: https://travis-ci.org/arcnmx/cargo-clippy
+[license-badge]: https://img.shields.io/badge/license-MIT-lightgray.svg?style=flat-square
+[license]: https://github.com/arcnmx/cargo-clippy/blob/master/LICENSE
+[clippy]: https://github.com/Manishearth/rust-clippy
+[cargo-check]: https://github.com/rsolomo/cargo-check

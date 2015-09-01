@@ -1,1 +1,17 @@
 language: rust
+rust:
+    - nightly
+sudo: false
+
+os:
+    - linux
+
+cache:
+    directories:
+        - $TRAVIS_BUILD_DIR/target
+        - $HOME/.cargo
+
+script:
+    - cargo build
+    - export PATH="$PATH:$TRAVIS_BUILD_DIR/target/debug"
+    - cargo clippy
