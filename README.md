@@ -5,7 +5,13 @@
 `cargo clippy` runs [clippy] on the current project.
 This is a fork of [cargo-check].
 
+You may also pass additional parameters, like so:
+
+    cargo clippy --release -- -Dclippy -Wclippy_pedantic
+
+
 **NOTE:** requires nightly Rust.
+
 
 ## Installation
 
@@ -15,6 +21,7 @@ First compile with `cargo build --release`, then add
 **WARNING:** simply copying it is not enough; you must
 specifically add the directory to your path, or use
 a symbolic link instead.
+
 
 [travis-badge]: https://img.shields.io/travis/arcnmx/cargo-clippy/master.svg?style=flat-square
 [travis]: https://travis-ci.org/arcnmx/cargo-clippy

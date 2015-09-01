@@ -36,7 +36,7 @@ fn wrap_args<T, I, P>(it: I, clippy_path: P) -> Vec<String>
     }
 
     if !has_double_hyphen {
-        args.push("--".to_string()); // clippy lint warning!
+        args.push("--".to_owned());
     }
     args.push("-L".to_owned());
     args.push(clippy_path.as_ref().to_string_lossy().into_owned());
