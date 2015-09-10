@@ -1,3 +1,5 @@
+#![feature(fs_canonicalize)]
+
 use std::path::Path;
 
 #[cfg(not(test))]
@@ -5,12 +7,8 @@ fn main() {
     use std::{env, fs};
     use std::process::{self, Command};
 
-    let mut path = env::current_exe().unwrap();
-    while fs::symlink_metadata(&path).unwrap().file_type().is_symlink() {
-        let new_path = fs::read_link(&path).unwrap();
-        path = path.parent().unwrap().to_path_buf();
-        path.push(new_path);
-    }
+    let path = env::current_exe().unwrap();
+    let path = fs::canonicalize(path).unwrap();
     let path = path.parent().unwrap();
     let path = path.join("deps/");
 
