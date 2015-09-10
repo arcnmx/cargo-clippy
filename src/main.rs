@@ -1,11 +1,14 @@
+#![feature(fs_canonicalize)]
+
 use std::path::Path;
 
 #[cfg(not(test))]
 fn main() {
-    use std::env;
+    use std::{env, fs};
     use std::process::{self, Command};
 
     let path = env::current_exe().unwrap();
+    let path = fs::canonicalize(path).unwrap();
     let path = path.parent().unwrap();
     let path = path.join("deps/");
 
