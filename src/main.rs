@@ -10,7 +10,7 @@ fn main() {
     let path = env::current_exe().unwrap();
     let path = fs::canonicalize(path).unwrap();
     let path = path.parent().unwrap();
-    let path = path.join("deps/");
+    let path = path.join("deps");
 
     let args = wrap_args(env::args(), path);
     let mut command = Command::new("cargo");
