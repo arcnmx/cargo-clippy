@@ -1,5 +1,3 @@
-#![feature(fs_canonicalize)]
-
 use std::path::Path;
 
 #[cfg(not(test))]
