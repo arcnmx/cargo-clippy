@@ -8,5 +8,5 @@ authors = [
 license = "MIT"
 readme = "README.md"
 
-[dependencies.clippy]
-git = "https://github.com/Manishearth/rust-clippy"
+[dependencies]
+clippy = {path = "clippy"}
