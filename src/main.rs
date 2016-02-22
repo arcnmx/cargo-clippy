@@ -42,6 +42,7 @@ fn wrap_args<T, I, P>(it: I, clippy_path: P) -> Vec<String>
     args.push("-L".to_owned());
     args.push(clippy_path.as_ref().to_string_lossy().into_owned());
     args.push("-lclippy".to_owned());
+    args.push("--test".to_owned());
     args.push("-Zextra-plugins=clippy".to_owned());
     args.push("-Zno-trans".to_owned());
     args
