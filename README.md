@@ -25,7 +25,7 @@ a symbolic link instead.
 
 [travis-badge]: https://img.shields.io/travis/arcnmx/cargo-clippy/master.svg?style=flat-square
 [travis]: https://travis-ci.org/arcnmx/cargo-clippy
-[license-badge]: https://img.shields.io/badge/license-MIT-lightgray.svg?style=flat-square
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license]: https://github.com/arcnmx/cargo-clippy/blob/master/LICENSE
 [clippy]: https://github.com/Manishearth/rust-clippy
 [cargo-check]: https://github.com/rsolomo/cargo-check
