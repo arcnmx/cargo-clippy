@@ -46,3 +46,53 @@ fn wrap_args<T, I, P>(it: I, clippy_path: P) -> Vec<String>
     args.push("-Zno-trans".to_owned());
     args
 }
+
+#[cfg(test)]
+mod test {
+    use super::wrap_args;
+
+    #[test]
+    fn test_wrap_args_no_double_hyphen() {
+        let args = [
+            "/usr/local/bin/cargo-clippy",
+            "clippy",
+            "--lib"
+        ];
+        let actual = wrap_args(&args, "/path/to/clippy");
+        let expected = [
+            "rustc",
+            "--lib",
+            "--",
+            "-L",
+            "/path/to/clippy",
+            "-lclippy",
+            "-Zextra-plugins=clippy",
+            "-Zno-trans",
+        ];
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn test_wrap_args_double_hyphen() {
+        let args = [
+            "/usr/local/bin/cargo-clippy",
+            "clippy",
+            "--lib",
+            "--",
+            "-Cprefer-dynamic"
+        ];
+        let actual = wrap_args(&args, "/path/to/clippy");
+        let expected = [
+            "rustc",
+            "--lib",
+            "--",
+            "-Cprefer-dynamic",
+            "-L",
+            "/path/to/clippy",
+            "-lclippy",
+            "-Zextra-plugins=clippy",
+            "-Zno-trans",
+        ];
+        assert_eq!(actual, expected);
+    }
+}

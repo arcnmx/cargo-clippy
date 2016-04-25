@@ -13,5 +13,6 @@ cache:
 
 script:
     - cargo build
+    - cargo test
     - export PATH="$PATH:$TRAVIS_BUILD_DIR/target/debug"
     - cargo clippy -- -Wclippy_pedantic
