@@ -15,12 +15,7 @@ You may also pass additional parameters, like so:
 
 ## Installation
 
-First compile with `cargo build --release`, then add
-`target/release/cargo-clippy` into your `$PATH`.
-
-**WARNING:** simply copying it is not enough; you must
-specifically add the directory to your path, or use
-a symbolic link instead.
+`cargo install --git https://github.com/arcnmx/cargo-clippy.git`
 
 
 [travis-badge]: https://img.shields.io/travis/arcnmx/cargo-clippy/master.svg?style=flat-square
